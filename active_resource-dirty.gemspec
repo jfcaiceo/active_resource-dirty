@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version     = ActiveResource::Dirty::VERSION
   spec.authors     = ['Francisco Caiceo']
   spec.email       = ['jfcaiceo55@gmail.com']
-  spec.homepage    = 'https://github.com/jfcaiceo/devise-activeresource'
+  spec.homepage    = 'https://github.com/jfcaiceo/active_resource-dirty'
   spec.summary     = 'ActiveModel::Dirty support for ActiveResource'
   spec.description = 'Monkey Patch to support ActiveModel::Dirty methods in ActiveResource'
   spec.license     = 'MIT'
