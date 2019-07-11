@@ -1,5 +1,5 @@
 # ActiveResource::Dirty
-`ActiveResource::Dirty` is a monkey patch that supports `ActiveModel::Dirty` methods in `ActiveResource`.
+`ActiveResource::Dirty` is a monkey patch that supports `ActiveModel::Dirty` methods in [ActiveResource](https://github.com/rails/activeresource).
 
 ## Usage
 Provides a way to track changes in your object. For example:
