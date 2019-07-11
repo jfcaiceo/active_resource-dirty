@@ -3,7 +3,6 @@ $:.push File.expand_path("lib", __dir__)
 # Maintain your gem's version:
 require 'active_resource/dirty/version'
 
-# Describe your gem and declare its dependencies:
 Gem::Specification.new do |spec|
   spec.name        = 'active_resource-dirty'
   spec.version     = ActiveResource::Dirty::VERSION
@@ -11,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email       = ['jfcaiceo55@gmail.com']
   spec.homepage    = 'https://github.com/jfcaiceo/devise-activeresource'
   spec.summary     = 'ActiveModel::Dirty support for ActiveResource'
-  spec.description = 'ActiveModel::Dirty support for ActiveResource'
+  spec.description = 'Monkey Patch to support ActiveModel::Dirty methods in ActiveResource'
   spec.license     = 'MIT'
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
@@ -25,7 +24,7 @@ Gem::Specification.new do |spec|
 
   spec.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
 
-  spec.add_dependency "rails", "~> 5.2.0"
-
-  spec.add_development_dependency "sqlite3"
+  spec.add_dependency 'activemodel', '~> 5.2.0'
+  spec.add_dependency 'activeresource', '~> 5.1.0'
+  spec.add_dependency 'activesupport', '~> 5.2.0'
 end

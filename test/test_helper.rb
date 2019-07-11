@@ -1,20 +1,23 @@
-# Configure Rails Environment
-ENV["RAILS_ENV"] = "test"
+require 'bundler/setup'
+Bundler.setup
 
-require_relative "../test/dummy/config/environment"
-ActiveRecord::Migrator.migrations_paths = [File.expand_path("../test/dummy/db/migrate", __dir__)]
-require "rails/test_help"
+require 'minitest/autorun'
+require 'active_support'
+require 'active_support/test_case'
+require 'active_resource'
+require 'active_resource/dirty'
+require_relative './fixtures/person'
 
-# Filter out the backtrace from minitest while preserving the one from other libraries.
-Minitest.backtrace_filter = Minitest::BacktraceFilter.new
+INITIAL_AGE = 30
+UPDATED_AGE = 20
 
-require "rails/test_unit/reporter"
-Rails::TestUnitReporter.executable = 'bin/test'
+def setup_response
+  @frank = { id: 1, name: 'Frank', age: INITIAL_AGE }.to_json
+  @updated_frank = { id: 1, name: 'Frank', age: UPDATED_AGE }.to_json
 
-# Load fixtures from the engine
-if ActiveSupport::TestCase.respond_to?(:fixture_path=)
-  ActiveSupport::TestCase.fixture_path = File.expand_path("fixtures", __dir__)
-  ActionDispatch::IntegrationTest.fixture_path = ActiveSupport::TestCase.fixture_path
-  ActiveSupport::TestCase.file_fixture_path = ActiveSupport::TestCase.fixture_path + "/files"
-  ActiveSupport::TestCase.fixtures :all
+  ActiveResource::HttpMock.respond_to do |mock|
+    mock.get('/people/1.json', {}, @frank)
+    mock.put('/people/1.json', {}, @updated_frank)
+    mock.patch('/people/1.json', {}, @updated_frank)
+  end
 end
