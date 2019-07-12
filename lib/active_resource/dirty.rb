@@ -68,6 +68,8 @@ module ActiveResource
     def update
       return super unless patch_updates
 
+      return if changed_attributes.blank?
+
       run_callbacks :update do
         connection.patch(element_path(prefix_options),
                          encode_changed_attributes,

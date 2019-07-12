@@ -65,6 +65,15 @@ class ActiveResource::Dirty::Test < Minitest::Test
                  JSON.parse(last_request.body))
   end
 
+  def test_patch_request_not_send_if_no_changes
+    Person.with_custom_patch_flag(true) do
+      @person.save
+    end
+
+    assert_equal(1,
+                ActiveResource::HttpMock.requests.size)
+  end
+
   def test_use_put_request
     Person.with_custom_patch_flag(false) do
       @person.age = UPDATED_AGE
