@@ -35,6 +35,12 @@ class ActiveResource::Dirty::Test < Minitest::Test
                  @person.previous_changes)
   end
 
+  def test_update_attributes_previous_changes
+    @person.update_attributes(age: UPDATED_AGE)
+    assert_equal({ 'age' => [INITIAL_AGE, UPDATED_AGE] },
+                 @person.previous_changes)
+  end
+
   def test_reload_clear_previous_changes
     @person.age = UPDATED_AGE
     @person.save
@@ -70,8 +76,7 @@ class ActiveResource::Dirty::Test < Minitest::Test
       @person.save
     end
 
-    assert_equal(1,
-                ActiveResource::HttpMock.requests.size)
+    assert_equal(1, ActiveResource::HttpMock.requests.size)
   end
 
   def test_use_put_request

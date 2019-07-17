@@ -17,6 +17,20 @@ module ActiveResource
       end
     end
 
+    def update_attributes(attributes)
+      unless attributes.respond_to?(:to_hash)
+        raise ArgumentError, 'expected attributes to be able to convert'\
+          " to Hash, got #{attributes.inspect}"
+      end
+
+      attributes = attributes.to_hash
+      attributes.each do |key, value|
+        send("#{key}=".to_sym, value)
+      end
+
+      save
+    end
+
     def respond_to_missing?(method_name, include_private = false)
       method_name.to_s.end_with?('=') || super
     end
@@ -53,11 +67,6 @@ module ActiveResource
     # Monkey patch
     def forget_attribute_assignments; end
 
-    def encode_changed_attributes(options = {})
-      format_options = options.merge(only: keys_for_partial_write)
-      send("to_#{self.class.format.extension}", format_options)
-    end
-
     def keys_for_partial_write
       changed_attributes.keys
     end
@@ -72,7 +81,7 @@ module ActiveResource
 
       run_callbacks :update do
         connection.patch(element_path(prefix_options),
-                         encode_changed_attributes,
+                         encode(only: keys_for_partial_write),
                          self.class.headers).tap do |response|
           load_attributes_from_response(response)
         end
