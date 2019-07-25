@@ -3,11 +3,12 @@ require 'active_resource/dirty/patch_updates'
 module ActiveResource
   module Dirty
     # Save the record and clears changed attributes if successful.
-    def save(*)
-      if (status = super)
-        changes_applied
+    def save_without_validation(*)
+      run_callbacks :save do
+        saved = new? ? create : update
+        changes_applied if saved
+        saved
       end
-      status
     end
 
     # <tt>reload</tt> the record and clears changed attributes.

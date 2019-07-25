@@ -1,10 +1,10 @@
 PATH
   remote: .
   specs:
-    active_resource-dirty (1.0.2)
-      activemodel (~> 5.2.0)
+    active_resource-dirty (1.0.4)
+      activemodel (>= 5.2.0)
       activeresource (~> 5.1.0)
-      activesupport (~> 5.2.0)
+      activesupport (>= 5.2.0)
 
 GEM
   remote: https://rubygems.org/
@@ -40,4 +40,4 @@ DEPENDENCIES
   active_resource-dirty!
 
 BUNDLED WITH
-   2.0.1
+   2.0.2
