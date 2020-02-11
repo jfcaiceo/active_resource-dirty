@@ -38,11 +38,19 @@ module ActiveResource
 
     # Monkey patch
     def changes_applied
-      @previously_changed = changes
-      @attributes_changed_by_setter = ActiveSupport::HashWithIndifferentAccess.new
+      if new_active_model_version?
+        super
+      else
+        @previously_changed = changes
+        @attributes_changed_by_setter = ActiveSupport::HashWithIndifferentAccess.new
+      end
     end
 
     private
+
+    def new_active_model_version?
+      ActiveModel::VERSION::MAJOR == 6
+    end
 
     def method_missing(method_symbol, *arguments) #:nodoc:
       method_name = method_symbol.to_s
@@ -62,7 +70,11 @@ module ActiveResource
 
     # Monkey patch
     def mutations_from_database
-      @mutations_from_database ||= ActiveModel::NullMutationTracker.instance
+      @mutations_from_database ||= if new_active_model_version?
+                                     ActiveModel::ForcedMutationTracker.new(self)
+                                   else
+                                     ActiveModel::NullMutationTracker.instance
+                                   end
     end
 
     # Monkey patch

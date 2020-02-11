@@ -1,16 +1,16 @@
 PATH
   remote: .
   specs:
-    active_resource-dirty (1.0.4)
-      activemodel (>= 5.2.0)
+    active_resource-dirty (1.0.5)
+      activemodel (>= 5.2.0, < 6)
       activeresource (~> 5.1.0)
-      activesupport (>= 5.2.0)
+      activesupport (>= 5.2.0, < 6)
 
 GEM
   remote: https://rubygems.org/
   specs:
-    activemodel (5.2.3)
-      activesupport (= 5.2.3)
+    activemodel (5.2.4.1)
+      activesupport (= 5.2.4.1)
     activemodel-serializers-xml (1.0.2)
       activemodel (> 5.x)
       activesupport (> 5.x)
@@ -19,18 +19,18 @@ GEM
       activemodel (>= 5.0, < 7)
       activemodel-serializers-xml (~> 1.0)
       activesupport (>= 5.0, < 7)
-    activesupport (5.2.3)
+    activesupport (5.2.4.1)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
-    builder (3.2.3)
-    concurrent-ruby (1.1.5)
-    i18n (1.6.0)
+    builder (3.2.4)
+    concurrent-ruby (1.1.6)
+    i18n (1.8.2)
       concurrent-ruby (~> 1.0)
-    minitest (5.11.3)
+    minitest (5.14.0)
     thread_safe (0.3.6)
-    tzinfo (1.2.5)
+    tzinfo (1.2.6)
       thread_safe (~> 0.1)
 
 PLATFORMS
