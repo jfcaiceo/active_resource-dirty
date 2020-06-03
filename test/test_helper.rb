@@ -10,6 +10,7 @@ require_relative './fixtures/person'
 
 INITIAL_AGE = 30
 UPDATED_AGE = 20
+UPDATED_WRITE_ONLY = 'new_value'.freeze
 
 def setup_response
   @frank = { id: 1, name: 'Frank', age: INITIAL_AGE }.to_json

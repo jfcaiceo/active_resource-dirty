@@ -100,4 +100,11 @@ class ActiveResource::Dirty::Test < Minitest::Test
     assert_equal({ 'id' => 1, 'name' => 'Frank', 'age' => UPDATED_AGE },
                  JSON.parse(last_request.body))
   end
+
+  def test_changing_write_only_attributes
+    @person.write_only = UPDATED_WRITE_ONLY
+    assert(@person.changed?)
+    assert_equal({ 'write_only' => [nil, UPDATED_WRITE_ONLY] },
+                 @person.changes)
+  end
 end
