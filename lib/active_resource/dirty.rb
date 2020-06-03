@@ -55,7 +55,7 @@ module ActiveResource
     def method_missing(method_symbol, *arguments) #:nodoc:
       method_name = method_symbol.to_s
       attribute_name = method_name.match(/^(.+)=$/)&.captures&.first
-      if attribute_name && attributes.key?(attribute_name)
+      if attribute_name && known_attributes.include?(attribute_name)
         new_value = arguments.first
 
         if attribute_changed?(attribute_name) && changed_attributes[attribute_name] == new_value
