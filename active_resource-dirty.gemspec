@@ -17,5 +17,5 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'activemodel', '>= 5.2.0', '< 7'
   spec.add_dependency 'activeresource', '~> 5.1.0'
-  spec.add_dependency 'activesupport', '>= 5.2.0', '< 7'
+  spec.add_dependency 'activesupport', '>= 5.2.0', '< 8'
 end
